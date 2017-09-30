@@ -8,7 +8,7 @@ ScreenManagement:
 
 <Button>:
     font_size: self.texture_size[1]/4 
-    size_hint: 0.25,0.15
+    size_hint: 0.25,0.120
     color: (1, 1, 1, 1)
     background_color: (0.81, 0.20, 0.81, 1)
     #width: self.texture_size[0]
@@ -23,47 +23,47 @@ ScreenManagement:
     name: "main"
     canvas:
         Color:
-            rgb: (0,0,0)
+            rgb: (0, 0, 0)
         Rectangle:
             pos: self.pos
             size: self.size
     Button:
         on_release: app.root.current = "other"
         text: "Gross Motor Gait and Balance"
-        pos_hint: {"right":0.4,"top":0.85}
+        pos_hint: {"right":0.25,"top":0.995}
     
     Button:
         on_release: app.root.current = "other"
         text: "Synchronous Movements"
-        pos_hint: {"right":0.4,"top":0.65}
+        pos_hint: {"right":0.25,"top":0.870}
     
     Button:
         on_release: app.root.current = "other"
         text: "Bilateral Coordination & Response Inhibition"
-        pos_hint: {"right":0.4,"top":0.45}
+        pos_hint: {"right":0.25,"top":0.745}
 
     Button:
         on_release: app.root.current = "other"
         text: "Bilateral Coordination & Response Inhibition\n(Red/Green Light)"
-        pos_hint: {"right":0.4,"top":0.25}
+        pos_hint: {"right":0.25,"top":0.620}
 
     Button:
         on_release: app.root.current = "other"
         text: "Visual Response Inhibition"
-        pos_hint: {"right":0.8,"top":0.85}
+        pos_hint: {"right":0.25,"top":0.495}
 
     Button:
         on_release: app.root.current = "other"
         text: "Cross Body Game"
-        pos_hint: {"right":0.8,"top":0.65}
+        pos_hint: {"right":0.25,"top":0.370}
     Button:
         on_release: app.root.current = "other"
         text: " Finger-Nose Coordination"
-        pos_hint: {"right":0.8,"top":0.45}
+        pos_hint: {"right":0.25,"top":0.245}
     Button:
         on_release: app.root.current = "other"
         text: "Rapid Sequential Movements"
-        pos_hint: {"right":0.8,"top":0.25}
+        pos_hint: {"right":0.25,"top":0.120}
 
 
 <GamesA>:
