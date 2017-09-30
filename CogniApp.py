@@ -4,10 +4,16 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
+from kivy.properties import ListProperty
+
+
+class ColourLabel(Label):
+    l = Label(text='Hello world')
+    ellipse_colour = ListProperty([1, 0, 0, 1])
 
 class ProgressMap(Widget):
-    l = Label(text='Hello world')
-
+    pass
+    
 class GamesA(Screen):
     pass
 
