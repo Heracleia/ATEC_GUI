@@ -1,0 +1,82 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import hex kivy.utils.get_color_from_hex
+
+ScreenManagement:
+    transition:FadeTransition()
+    MainScreen:
+    GamesA:
+
+<Button>:
+    font_size: self.texture_size[1]/4 
+    size_hint: 0.25,0.15
+    color: (1, 1, 1, 1)
+    background_color: (0.81, 0.20, 0.81, 1)
+    #width: self.texture_size[0]
+    #height: self.texture_size[1]
+    text_size: self.width,self.height
+    halign: 'center'
+    valign: 'middle'
+
+
+
+<MainScreen>:
+    name: "main"
+    canvas:
+        Color:
+            rgb: (0,0,0)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Button:
+        on_release: app.root.current = "other"
+        text: "Gross Motor Gait and Balance"
+        pos_hint: {"right":0.4,"top":0.85}
+    
+    Button:
+        on_release: app.root.current = "other"
+        text: "Synchronous Movements"
+        pos_hint: {"right":0.4,"top":0.65}
+    
+    Button:
+        on_release: app.root.current = "other"
+        text: "Bilateral Coordination & Response Inhibition"
+        pos_hint: {"right":0.4,"top":0.45}
+
+    Button:
+        on_release: app.root.current = "other"
+        text: "Bilateral Coordination & Response Inhibition\n(Red/Green Light)"
+        pos_hint: {"right":0.4,"top":0.25}
+
+    Button:
+        on_release: app.root.current = "other"
+        text: "Visual Response Inhibition"
+        pos_hint: {"right":0.8,"top":0.85}
+
+    Button:
+        on_release: app.root.current = "other"
+        text: "Cross Body Game"
+        pos_hint: {"right":0.8,"top":0.65}
+    Button:
+        on_release: app.root.current = "other"
+        text: " Finger-Nose Coordination"
+        pos_hint: {"right":0.8,"top":0.45}
+    Button:
+        on_release: app.root.current = "other"
+        text: "Rapid Sequential Movements"
+        pos_hint: {"right":0.8,"top":0.25}
+
+
+<GamesA>:
+    name: "other"
+    Button:
+        on_release: app.root.current = "other"
+        text: "Next Screen"
+        font_size: 50
+    Button:
+        on_release: app.root.current = "other"
+        text: "Next Screen"
+        font_size: 50
+
+
+
+
