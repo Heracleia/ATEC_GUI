@@ -1,104 +1,95 @@
-#:import FadeTransition kivy.uix.screenmanager.FadeTransition
-#:import hex kivy.utils.get_color_from_hex
-
-ScreenManagement:
-    transition:FadeTransition()
-    MainScreen:
-    GamesA:
-
-<Button>:
-    font_size: self.texture_size[1]/4 
-    size_hint: 0.25,0.120
-    color: (1, 1, 1, 1)
-    background_color: (0.81, 0.20, 0.81, 1)
-    #width: self.texture_size[0]
-    #height: self.texture_size[1]
-    text_size: self.width,self.height
-    halign: 'center'
-    valign: 'middle'
+#: import App kivy.app
+#: import Bubble kivy.uix.bubble 
+#: import Animation kivy.animation 
+#: import FloatLayout kivy.uix.floatlayout
+#: import Builder kivy.lang 
 
 
+<ListButton@ToggleButton>:
+    background_down: 'atlas://data/images/defaulttheme/bubble_btn'
+    background_normal: 'atlas://data/images/defaulttheme/bubble_btn_pressed'
+    group: 'context_menue_root'
+    on_release: ctx.on_release(self) if hasattr(ctx, 'on_release') else None
+    size_hint: ctx.size_hint if hasattr(ctx, 'size_hint') else (1, 1)
+    width: ctx.width if hasattr(ctx, 'width') else 1
+    text: ctx.text if hasattr(ctx, 'text') else ''
+    Image:
+        source: ctx.btn_img if ctx.text == 'hows' \
+            else 'atlas://data/images/defaulttheme/bubble_btn'
+        size: (20, 20)
+        y: self.parent.y + (self.parent.height/2) - (self.height/2)
+        x: self.parent.x + (self.parent.width - self.width)
 
-<Button>:
-    font_size: self.texture_size[1]/4 
-    size_hint: 0.25,0.120
-    color: (1, 1, 1, 1)
-    background_color: (0.81, 0.20, 0.81, 1)
-    #width: self.texture_size[0]
-    #height: self.texture_size[1]
-    text_size: self.width,self.height
-    halign: 'center'
-    valign: 'middle'
-
-
-
-<MainScreen>:
-    name: "main"
-
-    canvas:
-        Color:
-            rgb: (0, 0, 0)
-        Rectangle:
-            pos: self.pos
-            size: self.size
-
-    Label:
-        font_size: self.size[1]/10
-        text: "ATEC"
-        pos_hint: {"right":1.3,"top":1.45}
-
-       
-
+<Test>
     Button:
-        on_release: app.root.current = "other"
-        text: "Gross Motor Gait and Balance"
-        pos_hint: {"right":0.25,"top":0.995}
-    
-    Button:
-        on_release: app.root.current = "other"
-        text: "Synchronous Movements"
-        pos_hint: {"right":0.25,"top":0.870}
-    
-    Button:
-        on_release: app.root.current = "other"
-        text: "Bilateral Coordination & Response Inhibition"
-        pos_hint: {"right":0.25,"top":0.745}
+        text: 'press to launch menu'
+        size_hint: .2, .2
+        on_release:  root.add_menu(args[0])
 
-    Button:
-        on_release: app.root.current = "other"
-        text: "Bilateral Coordination & Response Inhibition\n(Red/Green Light)"
-        pos_hint: {"right":0.25,"top":0.620}
-
-    Button:
-        on_release: app.root.current = "other"
-        text: "Visual Response Inhibition"
-        pos_hint: {"right":0.25,"top":0.495}
-
-    Button:
-        on_release: app.root.current = "other"
-        text: "Cross Body Game"
-        pos_hint: {"right":0.25,"top":0.370}
-    Button:
-        on_release: app.root.current = "other"
-        text: " Finger-Nose Coordination"
-        pos_hint: {"right":0.25,"top":0.245}
-    Button:
-        on_release: app.root.current = "other"
-        text: "Rapid Sequential Movements"
-        pos_hint: {"right":0.25,"top":0.120}
-
-
-<GamesA>:
-    name: "other"
-    Button:
-        on_release: app.root.current = "other"
-        text: "Next Screen"
-        font_size: 50
-    Button:
-        on_release: app.root.current = "other"
-        text: "Next Screen"
-        font_size: 50
-
-
-
-
+<Cmenu>
+    size_hint: None, None
+    size: 120, 250
+    pos: (5, 50)
+    padding: 5
+    background_color: .2, .9, 1, .7
+    #wanna have some fun? set this to 'data/images/image-loading.gif'
+    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    orientation: 'vertical'
+    BoxLayout:
+        padding: 5
+        ScrollView:
+            BoxLayout:
+                size_hint: None, 1
+                width: root.width * 2 - 40
+                #root menu add/edit items here to show them in root menu
+                BoxLayout:
+                    orientation: 'vertical'
+                    ListButton:
+                        text: 'Hello'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'World'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'hows'
+                        #'>'image
+                        btn_img: 'atlas://data/images/defaulttheme/tree_closed'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'it'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'going'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'peace'
+                        on_release: root.menu_selected
+                # end root menu
+                #sub-menu
+                BoxLayout:
+                    ListButton:
+                        # go back(root menu) button
+                        text: '<'
+                        size_hint: (.15, 1)
+                        on_release: root.menu_selected
+                    BoxLayout:
+                        orientation: 'vertical'
+                        ListButton:
+                            text: 'The'
+                            on_release: root.menu_selected
+                        ListButton:
+                            text: 'revolving'
+                            on_release: root.menu_selected
+                        ListButton:
+                            text: 'door'
+                            on_release: root.menu_selected
+                        ListButton:
+                            text: 'hits'
+                            on_release: root.menu_selected
+                        ListButton:
+                            text: 'every'
+                            on_release: root.menu_selected
+                        ListButton:
+                            text: 'one'
+                            on_release: root.menu_selected
+                #end sub-menu
