@@ -309,6 +309,10 @@ class Cmenu1(Bubble):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
+
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
@@ -335,6 +339,10 @@ class Cmenu2(Bubble):
             def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
+
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
@@ -363,6 +371,10 @@ class Cmenu3(Bubble):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
+
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
@@ -389,6 +401,10 @@ class Cmenu4(Bubble):
             def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
+
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
@@ -417,6 +433,10 @@ class Cmenu5(Bubble):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
+
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
@@ -443,6 +463,10 @@ class Cmenu6(Bubble):
             def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
+
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
@@ -471,6 +495,10 @@ class Cmenu7(Bubble):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
+
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
@@ -497,11 +525,15 @@ class Cmenu8(Bubble):
             def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
+            
+            for child in self.parent.children:
+                    child.clear_widgets()
+                    child.background_color = [0.81,0.2,0.81,1]
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+            print l[0].text + ' selected :)'
 
 
 
@@ -529,8 +561,6 @@ class MainMenu(FloatLayout) :
             child.clear_widgets()
             child.background_color = [0.81,0.2,0.81,1]
 
-        prev_click = -1
-        print prev_click
         if  hasattr(self, 'context_menu'):
                 self.remove_widget(self.context_menu)
         if submenu_id == 1:
