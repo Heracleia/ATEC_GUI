@@ -5,6 +5,8 @@ from kivy.uix.bubble import Bubble
 from kivy.animation import Animation
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
+from kivy.graphics.instructions import CanvasBase
+from kivy.core.window import Window
 
 Builder.load_string('''
 #template for menu items
@@ -73,31 +75,6 @@ Builder.load_string('''
         on_release:  root.add_menu(args[0],8)
         text: "Rapid Sequential Movements"
         pos_hint: {"right":0.25,"top":0.120}
-
-
-<MainPage>
-    MainMenu
-    
-<SetA>
-    Button:
-        text: 'press to launch menu'
-        size_hint: .2, .2
-        on_release:  root.add_menu(args[0])
-        pos_hint: {"right":0.25,"top":0.620}
-  
-    Button:
-        text: 'press to launch menu'
-        size_hint: .2, .2
-        on_release:  root.add_menu(args[0])
-        pos_hint: {"right":0.4,"top":0.2}
-
-<SetB>
-    Button:
-        text: 'BBBBBBB'
-        size_hint: .2, .2
-        on_release:  root.add_menu(args[0])
-        pos_hint: {"right":0.6,"top":0.620}
-  
    
 
 
@@ -107,7 +84,7 @@ Builder.load_string('''
     padding: 10
     background_color: .2, .9, 1, .7
     #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    #background_image: 'atlas://data/images/defaulttheme/button_pressed'
     orientation: 'vertical'
     BoxLayout:
         padding: 5
@@ -119,42 +96,20 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'March Slow'
+                        text: 'Natural Walk'
                         on_release: root.menu_selected
                     ListButton:
-                        text: 'March Slow'
+                        text: 'Gait on Toes'
                         on_release: root.menu_selected
-                       
-                # end root menu
-                #sub-menu
-                BoxLayout:
                     ListButton:
-                        # go back(root menu) button
-                        text: '<'
-                        size_hint: (.15, 1)
+                        text: 'Tandem Gain'
                         on_release: root.menu_selected
-                    BoxLayout:
-                        orientation: 'vertical'
-                        ListButton:
-                            text: 'The'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'revolving'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'door'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'hits'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'every'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'one'
-                            on_release: root.menu_selected
-                #end sub-menu
-
+                    ListButton:
+                        text: 'Stand eyes closed hands outstretched'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Stand on One Foot'
+                        on_release: root.menu_selected
 
 
 <Cmenu2>
@@ -178,38 +133,9 @@ Builder.load_string('''
                         text: 'March Slow'
                         on_release: root.menu_selected
                     ListButton:
-                        text: 'March Slow'
+                        text: 'March Fast'
                         on_release: root.menu_selected
                        
-                # end root menu
-                #sub-menu
-                BoxLayout:
-                    ListButton:
-                        # go back(root menu) button
-                        text: '<'
-                        size_hint: (.15, 1)
-                        on_release: root.menu_selected
-                    BoxLayout:
-                        orientation: 'vertical'
-                        ListButton:
-                            text: 'The'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'revolving'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'door'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'hits'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'every'
-                            on_release: root.menu_selected
-                        ListButton:
-                            text: 'one'
-                            on_release: root.menu_selected
-                #end sub-menu
 
 <Cmenu3>
     size_hint: None, None
@@ -230,7 +156,10 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'Bi-manual Bag Pass Slow'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Bi-manual Bag Pass Fast'
                         on_release: root.menu_selected
 
 <Cmenu4>
@@ -252,7 +181,19 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'Red Light/Green Light -- Slow'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Red Light/Green Light -- Fast'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Red Light/Green Light/Yellow Light -- Slow'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Red Light/Green Light/Yellow Light -- Fast'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Red Light/Green Light/Yellow Light -- Visual Slow'
                         on_release: root.menu_selected
 
 <Cmenu5>
@@ -274,7 +215,7 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'A sailor went to Sea, Sea, Sea'
                         on_release: root.menu_selected
 
 <Cmenu6>
@@ -296,8 +237,15 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'Cross Body Ears - Knees'
                         on_release: root.menu_selected
+                    ListButton:
+                        text: 'Cross Body Shoulders = Cross Body Hips'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Combined Reverse Actions'
+                        on_release: root.menu_selected
+
 
 <Cmenu7>
     size_hint: None, None
@@ -340,7 +288,22 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'Foot Tap'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Foot-Heel-Toe Tap'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Hand Pat'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Hand Pronate/supinate'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Finger Tap'
+                        on_release: root.menu_selected
+                    ListButton:
+                        text: 'Appose Finger Succession'
                         on_release: root.menu_selected                 
 ''')
 
@@ -530,52 +493,29 @@ class Cmenu8(Bubble):
             anim.bind(on_complete = on_anim_complete)
             print l[0].text + ' selected'
 
-class SetA(FloatLayout):
-
-    def __init__(self, **kwargs):
-        super(SetA, self).__init__(**kwargs)
-
-    def on_touch_down(self, *l):
-        #allow kids to get touch
-        if super(SetA, self).on_touch_down(*l):
-            return True
-        # remove menu when touched and menu exists
-        if hasattr(self, 'context_menu'):
-            self.remove_widget(self.context_menu)
-
-    def add_menu(self, obj, *l):
-        if not hasattr(self, 'context_menu'):
-            self.context_menu = Cmenu1()
-        self.remove_widget(self.context_menu)
-        self.add_widget(self.context_menu)
-        self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
-
-
-
-class SetB(FloatLayout):
-
-    def __init__(self, **kwargs):
-        super(SetB, self).__init__(**kwargs)
-
-    def on_touch_down(self, *l):
-        #allow kids to get touch
-        if super(SetB, self).on_touch_down(*l):
-            return True
-        # remove menu when touched and menu exists
-        if hasattr(self, 'context_menu'):
-            self.remove_widget(self.context_menu)
-
-    def add_menu(self, obj, *l):
-        if not hasattr(self, 'context_menu'):
-            self.context_menu = Cmenu1()
-        self.remove_widget(self.context_menu)
-        self.add_widget(self.context_menu)
-        self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
 
 
 
 
 class MainMenu(FloatLayout) :
+
+    def __init__(self, **kwargs):
+        super(MainMenu, self).__init__(**kwargs)
+        self.context_menu = Cmenu1()
+
+
+    def on_touch_down(self, *l):
+        #allow kids to get touch
+        if super(MainMenu, self).on_touch_down(*l):
+            return True
+        self.remove_widget(self.context_menu)
+
+        for child in self.children:
+            child.clear_widgets()
+
+
+            
+
     def add_menu(self, obj, submenu_id,*l):
         if  hasattr(self, 'context_menu'):
                 self.remove_widget(self.context_menu)
@@ -600,25 +540,9 @@ class MainMenu(FloatLayout) :
        
     def menu_selected(self, *l):
         if l[0].text == 'Cross Body Game':
-            # move to sub menu
-            def add_menu(self, obj, *l):
-                if not hasattr(self, 'context_menu'):
-                    self.context_menu = SetA()
-                self.remove_widget(self.context_menu)
-                self.add_widget(self.context_menu)
-                self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
-
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
+            pass
             #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == 'Synchronous Movements':
-            # move to sub menu
-            def add_menu(self, obj, *l):
-                if not hasattr(self, 'context_menu'):
-                    self.context_menu = SetB()
-                self.remove_widget(self.context_menu)
-                self.add_widget(self.context_menu)
-                self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
-
+        elif l[0].text == 'Synchronous Movements':   
             Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
         elif l[0].text == '<':
             # move back to root menu
@@ -637,27 +561,11 @@ class MainMenu(FloatLayout) :
             anim.bind(on_complete = on_anim_complete)
             print l[0].text + ' selected'
 
-class MainPage(FloatLayout):
-    def __init__(self, **kwargs):
-        super(MainPage, self).__init__(**kwargs)
-
-    def on_touch_down(self, *l):
-        #allow kids to get touch
-        if super(MainPage, self).on_touch_down(*l):
-            return True
-        self.clear_widgets()
-        for child in self.children:
-            child.canvas.ask_update()
-            for c in child.children:
-                c.canvas.ask_update()
-
-        # remove menu when touched and menu exists
-        
 
 
 class MyApp(App):
     def build(self):
-        return MainPage()
+        return MainMenu()
 
 
 if __name__ == '__main__':
