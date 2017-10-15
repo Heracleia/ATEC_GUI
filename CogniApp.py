@@ -6,7 +6,6 @@ from kivy.animation import Animation
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
 from kivy.graphics.instructions import CanvasBase
-from kivy.core.window import Window
 
 Builder.load_string('''
 #template for menu items
@@ -31,7 +30,14 @@ Builder.load_string('''
     valign: 'middle'
     background_down: 'button_down.png'
 
+
 <MainMenu>
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
     Button:
         text: "Gross Motor Gait and Balance"
         on_release:  root.add_menu(args[0],1)
@@ -91,7 +97,6 @@ Builder.load_string('''
                     ListButton:
                         text: 'Natural Walk'
                         on_release: root.menu_selected
-                        background_color: ( 1, .5, 0, 1)
                     ListButton:
                         text: 'Gait on Toes'
                         on_release: root.menu_selected
@@ -248,7 +253,7 @@ Builder.load_string('''
 
 <Cmenu8>
     size_hint: 0.41, 0.7
-    pos_hint: {"right":0.65,"top":0.69}
+    pos_hint: {"right":0.65,"top":0.68}
     padding: .005
     background_color: 1, 0, 0, 1
     orientation: 'vertical'
@@ -283,8 +288,12 @@ Builder.load_string('''
 
 
 class Cmenu1(Bubble):
-
+    def __init__(self, **kwargs):
+        super(Cmenu1, self).__init__(**kwargs)
+        self.show_arrow = False
+    
     def menu_selected(self, *l):
+
         if l[0].text == 'hows':
             # move to sub menu
             Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
@@ -307,6 +316,9 @@ class Cmenu1(Bubble):
 
 
 class Cmenu2(Bubble):
+    def __init__(self, **kwargs):
+        super(Cmenu2, self).__init__(**kwargs)
+        self.show_arrow = False
 
     def menu_selected(self, *l):
         if l[0].text == 'hows':
@@ -330,6 +342,10 @@ class Cmenu2(Bubble):
             print l[0].text + ' selected'
 
 class Cmenu3(Bubble):
+    
+    def __init__(self, **kwargs):
+        super(Cmenu3, self).__init__(**kwargs)
+        self.show_arrow = False
 
     def menu_selected(self, *l):
         if l[0].text == 'hows':
@@ -354,6 +370,10 @@ class Cmenu3(Bubble):
 
 class Cmenu4(Bubble):
 
+    def __init__(self, **kwargs):
+        super(Cmenu4, self).__init__(**kwargs)
+        self.show_arrow = False
+
     def menu_selected(self, *l):
         if l[0].text == 'hows':
             # move to sub menu
@@ -376,6 +396,10 @@ class Cmenu4(Bubble):
             print l[0].text + ' selected'
 
 class Cmenu5(Bubble):
+
+    def __init__(self, **kwargs):
+        super(Cmenu5, self).__init__(**kwargs)
+        self.show_arrow = False
 
     def menu_selected(self, *l):
         if l[0].text == 'hows':
@@ -400,6 +424,10 @@ class Cmenu5(Bubble):
 
 class Cmenu6(Bubble):
 
+    def __init__(self, **kwargs):
+        super(Cmenu6, self).__init__(**kwargs)
+        self.show_arrow = False
+
     def menu_selected(self, *l):
         if l[0].text == 'hows':
             # move to sub menu
@@ -423,6 +451,10 @@ class Cmenu6(Bubble):
 
 class Cmenu7(Bubble):
 
+    def __init__(self, **kwargs):
+        super(Cmenu7, self).__init__(**kwargs)
+        self.show_arrow = False
+
     def menu_selected(self, *l):
         if l[0].text == 'hows':
             # move to sub menu
@@ -445,6 +477,10 @@ class Cmenu7(Bubble):
             print l[0].text + ' selected'
 
 class Cmenu8(Bubble):
+
+    def __init__(self, **kwargs):
+        super(Cmenu8, self).__init__(**kwargs)
+        self.show_arrow = False
 
     def menu_selected(self, *l):
         if l[0].text == 'hows':
@@ -483,17 +519,15 @@ class MainMenu(FloatLayout) :
         if super(MainMenu, self).on_touch_down(*l):
             return True
         self.remove_widget(self.context_menu)
-
         for child in self.children:
             child.clear_widgets()
 
-
-            
 
     def add_menu(self, obj, submenu_id,*l):
         if  hasattr(self, 'context_menu'):
                 self.remove_widget(self.context_menu)
         if submenu_id == 1:
+            obj.background_color = [1,1,1,1]
             self.context_menu = Cmenu1()
         elif submenu_id == 2:
             self.context_menu = Cmenu2()
