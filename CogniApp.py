@@ -521,54 +521,45 @@ class MainMenu(FloatLayout) :
         self.remove_widget(self.context_menu)
         for child in self.children:
             child.clear_widgets()
+            child.background_color = [0.81,0.2,0.81,1]
 
 
     def add_menu(self, obj, submenu_id,*l):
+        for child in self.children:
+            child.clear_widgets()
+            child.background_color = [0.81,0.2,0.81,1]
+
+        prev_click = -1
+        print prev_click
         if  hasattr(self, 'context_menu'):
                 self.remove_widget(self.context_menu)
         if submenu_id == 1:
-            obj.background_color = [1,1,1,1]
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu1()
         elif submenu_id == 2:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu2()
         elif submenu_id == 3:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu3()
         elif submenu_id == 4:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu4()
         elif submenu_id == 5:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu5()
         elif submenu_id == 6:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu6()
         elif submenu_id == 7:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu7()
         elif submenu_id == 8:
+            obj.background_color = [0,1,0,1]
             self.context_menu = Cmenu8()
         self.add_widget(self.context_menu)
         self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
        
-    def menu_selected(self, *l):
-        if l[0].text == 'Cross Body Game':
-            pass
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == 'Synchronous Movements':   
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            self.parent.remove_widget(self.context_menu)
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
-
-            def on_anim_complete(*l):
-                self.parent.context_menu.background_color = (r, g, b, a)
-                self.parent.remove_widget(self.parent.context_menu)
-
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
-
 
 
 class MyApp(App):
