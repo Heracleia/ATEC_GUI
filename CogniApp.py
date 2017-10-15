@@ -11,20 +11,13 @@ from kivy.core.window import Window
 Builder.load_string('''
 #template for menu items
 [ListButton@ToggleButton]
-    background_down: 'atlas://data/images/defaulttheme/bubble_btn'
-    background_normal: 'atlas://data/images/defaulttheme/bubble_btn_pressed'
+    background_color: ( 1, .5, 0, 1)
     group: 'context_menue_root'
     on_release: ctx.on_release(self) if hasattr(ctx, 'on_release') else None
     size_hint: ctx.size_hint if hasattr(ctx, 'size_hint') else (1, 1)
     width: ctx.width if hasattr(ctx, 'width') else 1
     text: ctx.text if hasattr(ctx, 'text') else ''
-    Image:
-        source: ctx.btn_img if ctx.text == 'hows' \
-            else 'atlas://data/images/defaulttheme/bubble_btn'
-        size: (20, 20)
-        y: self.parent.y + (self.parent.height/2) - (self.height/2)
-        x: self.parent.x + (self.parent.width - self.width)
-
+    
 
 <Button>:
     font_size: self.texture_size[1]/4 
@@ -36,6 +29,7 @@ Builder.load_string('''
     text_size: self.width,self.height
     halign: 'center'
     valign: 'middle'
+    background_down: 'button_down.png'
 
 <MainMenu>
     Button:
@@ -79,18 +73,17 @@ Builder.load_string('''
 
 
 <Cmenu1>
-    size_hint: 0.4, 0.6
-    pos_hint: {"right":0.65,"top":0.495}
-    padding: 10
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    #background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.6
+    pos_hint: {"right":0.65,"top":1}
+    padding: 0.005
+    background_color: 1, 0, 0, 1
+    
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
@@ -98,6 +91,7 @@ Builder.load_string('''
                     ListButton:
                         text: 'Natural Walk'
                         on_release: root.menu_selected
+                        background_color: ( 1, .5, 0, 1)
                     ListButton:
                         text: 'Gait on Toes'
                         on_release: root.menu_selected
@@ -113,18 +107,16 @@ Builder.load_string('''
 
 
 <Cmenu2>
-    size_hint: 0.4, 0.6
-    pos_hint: {"right":0.65,"top":0.495}
-    padding: 10
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.3
+    pos_hint: {"right":0.65,"top":0.87}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
@@ -138,19 +130,16 @@ Builder.load_string('''
                        
 
 <Cmenu3>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.3
+    pos_hint: {"right":0.65,"top":0.75}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
@@ -163,19 +152,16 @@ Builder.load_string('''
                         on_release: root.menu_selected
 
 <Cmenu4>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.6
+    pos_hint: {"right":0.65,"top":0.62}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
@@ -197,41 +183,35 @@ Builder.load_string('''
                         on_release: root.menu_selected
 
 <Cmenu5>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.16
+    pos_hint: {"right":0.65,"top":0.50}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'A sailor went to Sea, Sea, Sea'
+                        text: ' A sailor went to Sea, Sea, Sea '
                         on_release: root.menu_selected
 
 <Cmenu6>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.35
+    pos_hint: {"right":0.65,"top":0.37}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
@@ -248,41 +228,35 @@ Builder.load_string('''
 
 
 <Cmenu7>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.15
+    pos_hint: {"right":0.65,"top":0.25}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        text: 'Hello'
+                        text: 'Finger-Nose Coordination'
                         on_release: root.menu_selected
 
 <Cmenu8>
-    size_hint: None, None
-    size: 120, 250
-    pos: (5, 50)
-    padding: 5
-    background_color: .2, .9, 1, .7
-    #wanna have some fun? set this to 'data/images/image-loading.gif'
-    background_image: 'atlas://data/images/defaulttheme/button_pressed'
+    size_hint: 0.41, 0.7
+    pos_hint: {"right":0.65,"top":0.69}
+    padding: .005
+    background_color: 1, 0, 0, 1
     orientation: 'vertical'
     BoxLayout:
         padding: 5
         ScrollView:
             BoxLayout:
-                size_hint: None, 1
+                size_hint: 1, 1
                 width: root.width * 2 - 40
                 #root menu add/edit items here to show them in root menu
                 BoxLayout:
