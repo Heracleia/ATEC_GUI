@@ -6,12 +6,15 @@ from kivy.animation import Animation
 from kivy.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
 from kivy.graphics.instructions import CanvasBase
+from kivy.uix.progressbar import ProgressBar
+
+
 
 Builder.load_string('''
 #template for menu items
 [ListButton@ToggleButton]
     background_normal: 'button_normal_cmenu.jpg'
-    background_color: ctx.background_color if hasattr(ctx, 'background_color') else [1, .5, 0, 1]
+    background_color: ctx.background_color if hasattr(ctx, 'background_color') else [1, 1, 1, 1]
     group: 'context_menue_root'
     on_release: ctx.on_release(self) if hasattr(ctx, 'on_release') else None
     size_hint: ctx.size_hint if hasattr(ctx, 'size_hint') else (1, 1)
@@ -38,7 +41,7 @@ Builder.load_string('''
     size_hint: 0.75, 1
     canvas:
         Rectangle:
-            source: 'main_canvas.jpg'
+            source: 'main_canvas2.jpg'
             pos: self.pos
             size: self.size
 
@@ -55,25 +58,37 @@ Builder.load_string('''
         id: "sdfdsfsdf"
        
         Button:
-            id: start
-            text: "START"
-            on_release:  root.add_menu(args[0],"start")
+            #text: "START"
+            on_release:  root.on_control(args[0],"start")
             pos_hint: {"right":0.3,"top":1} 
-            background_normal: "start.jpg"
+            background_normal: "start2.png"
+            size_hint: 0.1,0.1
+            background_down: 'record_pressed.png'
 
         Button:
-            id: "pause"
-            text: "PAUSE"
-            on_release:  root.add_menu(args[0],"pause")
-            pos_hint: {"right":0.6,"top":1}   
-            background_normal: "pause.jpg"
+            #text: "PAUSE"
+            on_release:  root.on_control(args[0],"pause")
+            pos_hint: {"right":0.5,"top":1}   
+            background_normal: "pause.png"
+            size_hint: 0.1,0.1
+            background_down: 'pause_pressed.png'
 
         Button:
-            id: "stop"
-            text: "STOP"
-            on_release:  root.add_menu(args[0],"stop")
-            pos_hint: {"right":0.9,"top":1}  
-            background_normal: "button_normal_cmenu.jpg"
+            #text: "STOP"
+            on_release:  root.on_control(args[0],"stop")
+            pos_hint: {"right":0.7,"top":1}  
+            background_normal: "stop.png"
+            size_hint: 0.1,0.1
+            background_down: 'stop_pressed.png'
+
+        Button:
+            #text: "Task Copleted"
+            on_release:  root.on_control(args[0],"complete")
+            pos_hint: {"right":1,"top":1}  
+            background_normal: "complete2.png"
+            background_down: 'complete.png'
+            size_hint: 0.1,0.1
+        
         
 
     Button:
@@ -366,7 +381,7 @@ class Cmenu1(Bubble):
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
             anim.start(self.parent.context_menu)
             anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+            print l[0].text + ' selected :)'
 
 
 class Cmenu2(Bubble):
@@ -640,6 +655,15 @@ class MainMenu(FloatLayout) :
             self.add_widget(self.context_menu)
             self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
        
+    def  on_control(self, obj, control_id,*l):
+        if control_id == "start":
+            print "play button pressed"
+        elif control_id == "pause":
+            print "pause button pressed"
+        elif control_id =="complete":
+            print "Task Copleted"
+        else:
+            print "stop button pressed"
 
 
 class MyApp(App):
