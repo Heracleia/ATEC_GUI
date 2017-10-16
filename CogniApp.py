@@ -22,7 +22,7 @@ Builder.load_string('''
 <Button>:
     font_size: self.texture_size[1]/4 
     size_hint: 0.25,0.120
-    color: (1, 1, 1, 1)
+    color: (0, 0, 0, 1)
     #background_color: (0.81, 0.20, 0.81, 1)
     #width: self.texture_size[0]
     #height: self.texture_size[1]
@@ -31,55 +31,101 @@ Builder.load_string('''
     valign: 'middle'
     background_down: 'button_down.png'
     #background_down: 'atlas://data/images/defaulttheme/bubble_btn'
-    background_normal: 'button_normal.jpg'
 
+<MainScreen>
+    id: "main"
+    pos_hint: {"right":1,"top":1} 
+    size_hint: 0.75, 1
+    canvas:
+        Rectangle:
+            source: 'main_canvas.jpg'
+            pos: self.pos
+            size: self.size
 
+   
 
 <MainMenu>
     canvas:
-        Color:
-            rgba: 1,1,1,1
         Rectangle:
+            source: 'button_back.jpg'
             pos: self.pos
             size: self.size
+    
+    MainScreen:
+        id: "sdfdsfsdf"
+       
+        Button:
+            id: start
+            text: "START"
+            on_release:  root.add_menu(args[0],"start")
+            pos_hint: {"right":0.3,"top":1} 
+            background_normal: "start.jpg"
+
+        Button:
+            id: "pause"
+            text: "PAUSE"
+            on_release:  root.add_menu(args[0],"pause")
+            pos_hint: {"right":0.6,"top":1}   
+            background_normal: "pause.jpg"
+
+        Button:
+            id: "stop"
+            text: "STOP"
+            on_release:  root.add_menu(args[0],"stop")
+            pos_hint: {"right":0.9,"top":1}  
+            background_normal: "button_normal_cmenu.jpg"
+        
+
     Button:
+        id: "sdsd"
         text: "Gross Motor Gait and Balance"
         on_release:  root.add_menu(args[0],1)
-        pos_hint: {"right":0.25,"top":0.995}  
+        pos_hint: {"right":0.25,"top":1}  
+        background_normal: 'button_normal.jpg'
+
 
     Button:
         on_release:  root.add_menu(args[0],2)
         text: "Synchronous Movements"
-        pos_hint: {"right":0.25,"top":0.870}
+        pos_hint: {"right":0.25,"top":0.873}
+        background_normal: 'button_normal.jpg'
 
     Button:
         on_release:  root.add_menu(args[0],3)
         text: "Bilateral Coordination & Response Inhibition"
         pos_hint: {"right":0.25,"top":0.745}
+        background_normal: 'button_normal.jpg'
 
     Button:
         on_release:  root.add_menu(args[0],4)
         text: "Bilateral Coordination & Response Inhibition     (Red/Green Light)"
         pos_hint: {"right":0.25,"top":0.620}
+        background_normal: 'button_normal.jpg'
 
     Button:
         on_release:  root.add_menu(args[0],5)
         text: "Visual Response Inhibition"
         pos_hint: {"right":0.25,"top":0.495}
+        background_normal: 'button_normal.jpg'
 
     Button:
         on_release:  root.add_menu(args[0],6)
         text: "Cross Body Game"
         pos_hint: {"right":0.25,"top":0.370}
+        background_normal: 'button_normal.jpg'
+
     Button:
         on_release:  root.add_menu(args[0],7)
         text: " Finger-Nose Coordination"
         pos_hint: {"right":0.25,"top":0.245}
+        background_normal: 'button_normal.jpg'
+
     Button:
         on_release:  root.add_menu(args[0],8)
         text: "Rapid Sequential Movements"
         pos_hint: {"right":0.25,"top":0.120}
-   
+        background_normal: 'button_normal.jpg'
+
 
 
 <Cmenu1>
@@ -314,7 +360,7 @@ class Cmenu1(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                    #child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -345,7 +391,7 @@ class Cmenu2(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -376,7 +422,7 @@ class Cmenu3(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                    #child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -407,7 +453,7 @@ class Cmenu4(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                    #child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -438,7 +484,7 @@ class Cmenu5(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -469,7 +515,7 @@ class Cmenu6(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                    #child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -500,7 +546,7 @@ class Cmenu7(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
 
             for child in self.parent.children:
-                    child.clear_widgets()
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -531,7 +577,7 @@ class Cmenu8(Bubble):
                 self.parent.remove_widget(self.parent.context_menu)
             
             for child in self.parent.children:
-                    child.clear_widgets()
+                    #child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
 
             anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
@@ -541,6 +587,11 @@ class Cmenu8(Bubble):
 
 
 
+class MainScreen(FloatLayout) :
+
+    def __init__(self, **kwargs):
+        super(MainScreen, self).__init__(**kwargs)
+        self.context_menu = Cmenu1()
 
 
 class MainMenu(FloatLayout) :
@@ -556,43 +607,38 @@ class MainMenu(FloatLayout) :
             return True
         self.remove_widget(self.context_menu)
         for child in self.children:
-            child.clear_widgets()
-            child.background_normal = "button_normal.jpg"
+                #child.clear_widgets()
+                child.background_normal = "button_normal.jpg"
 
 
     def add_menu(self, obj, submenu_id,*l):
         for child in self.children:
-            child.clear_widgets()
-            child.background_normal = "button_normal.jpg"
+                #child.clear_widgets()
+                child.background_normal = "button_normal.jpg"
 
         if  hasattr(self, 'context_menu'):
                 self.remove_widget(self.context_menu)
         if submenu_id == 1:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu1()
         elif submenu_id == 2:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu2()
         elif submenu_id == 3:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu3()
         elif submenu_id == 4:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu4()
         elif submenu_id == 5:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu5()
         elif submenu_id == 6:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu6()
         elif submenu_id == 7:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu7()
         elif submenu_id == 8:
-            obj.background_normal = "button_normal_is_on.jpg"
             self.context_menu = Cmenu8()
-        self.add_widget(self.context_menu)
-        self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
+
+        if submenu_id not in ["start","stop","pause"]:
+            obj.background_normal = "button_normal_is_on.jpg"
+            self.add_widget(self.context_menu)
+            self.context_menu.pos = obj.pos[0]+ obj.width, obj.pos[1]
        
 
 
