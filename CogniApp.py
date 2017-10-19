@@ -14,7 +14,7 @@ Builder.load_string('''
 #template for menu items
 [ListButton@ToggleButton]
     background_normal: 'button_normal_cmenu.jpg'
-    background_down: 'button_normal_cmenu.jpg'
+    background_down: 'button_normal_cmenu_d.jpg'
     #background_color: ctx.background_color if hasattr(ctx, 'background_color') else [1, 1, 1, 1]
     group: 'context_menue_root'
     on_release: ctx.on_release(self) if hasattr(ctx, 'on_release') else None
@@ -347,6 +347,7 @@ Builder.load_string('''
 ''')
 
 global task,subtask,text
+text =""
 
 
 
