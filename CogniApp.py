@@ -46,6 +46,9 @@ Builder.load_string('''
             source: 'main_canvas2.jpg'
             pos: self.pos
             size: self.size
+   
+
+
 
    
 
@@ -57,29 +60,40 @@ Builder.load_string('''
             size: self.size
     
     MainScreen:
-       
+         
+        Label:
+            id: label
+            text:"ATEC \\n\\nINTRODUCTION:\\n[Begin with child standing.]\\n\\nSCRIPT:\\nWe are going to play games today that involve using your body in lots of different ways.\\n\\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.\\n\\nWe will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.\\n\\nAre you ready to play the games?"
+            text_size: root.width-root.width*0.45,  root.height
+            font_size: self.texture_size[1]/28 
+            size: self.texture_size
+            pos_hint: {"right":0.92,"top":01} 
+            color: (1, 1, 1, 1)
+            halign: 'left'
+            valign: 'top'
+
         Button:
             #text: "START"
             on_release:  root.on_control(args[0],"start")
-            pos_hint: {"right":0.3,"top":1} 
+            pos_hint: {"right":1,"top":0.8} 
             background_normal: "start2.png"
-            size_hint: 0.1,0.1
+            size_hint: 0.15,0.15
             background_down: 'record_pressed.png'
 
         Button:
             #text: "PAUSE"
             on_release:  root.on_control(args[0],"pause")
-            pos_hint: {"right":0.5,"top":1}   
+            pos_hint: {"right":1,"top":0.6}   
             background_normal: "pause.png"
-            size_hint: 0.1,0.1
+            size_hint: 0.15,0.15
             background_down: 'pause_pressed.png'
 
         Button:
             #text: "STOP"
             on_release:  root.on_control(args[0],"stop")
-            pos_hint: {"right":0.7,"top":1}  
+            pos_hint: {"right":1,"top":0.4}  
             background_normal: "stop.png"
-            size_hint: 0.1,0.1
+            size_hint: 0.15,0.15
             background_down: 'stop_pressed.png'
 
         Button:
@@ -88,7 +102,7 @@ Builder.load_string('''
             pos_hint: {"right":1,"top":1}  
             background_normal: "complete2.png"
             background_down: 'complete.png'
-            size_hint: 0.1,0.1
+            size_hint: 0.15,0.15
         
         
 
@@ -154,7 +168,6 @@ Builder.load_string('''
                 BoxLayout:
                     orientation: 'vertical'
                     ListButton:
-                        id:t11
                         text: 'Natural Walk'
                         on_release: root.menu_selected
                     ListButton:
@@ -346,8 +359,17 @@ Builder.load_string('''
                         on_release: root.menu_selected                 
 ''')
 
-global task,subtask,text
+global tast,text,intro
 text =""
+task=''
+
+
+
+intro="""INTRODUCTION:\n[Begin with child standing.]\nSCRIPT: We are going to play games today that involve using your body in lots of different ways.\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.\n"+
+We will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.\n
+Are you ready to play the games?"""
+
+
 
 
 
@@ -356,26 +378,78 @@ class Cmenu1(Bubble):
     def __init__(self, **kwargs):
         super(Cmenu1, self).__init__(**kwargs)
         self.show_arrow = False
-        self.show_arrow = False    
 
     def menu_selected(self,*l):
-        global task,subtask,text
-        if l[0].text == 'Natural Walk':
-            task = 1
-            subtask = 2
-        elif l[0].text == 'Gait on Toes':
-            task = 1
-            subtask = 2
-        elif l[0].text == 'Tandem Gain':
-            task = 1
-            subtask = 3
-        elif l[0].text == 'Stand eyes closed hands outstretched':
-            task = 1
-            subtask = 4
-        elif l[0].text == 'Stand on One Foot':
-            task = 1
-            subtask = 5
-        print task,subtask
+        global text,task
+        text = l[0].text
+
+        if text == 'Natural Walk':
+            task ='11'
+        elif text == 'Gait on Toes':
+            task ='12'
+        elif text == 'Tandem Gain':
+            task ='13'
+        elif text == 'Stand eyes closed hands outstretched':
+            task ='14'
+        elif text == 'Stand on One Foot':
+            task ='15'
+
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
+                self.parent.context_menu.background_color = (r, g, b, a)
+                self.parent.remove_widget(self.parent.context_menu)
+
+        for child in self.parent.children:
+                   # child.clear_widgets()
+                    child.background_normal = "button_normal.jpg"
+                    child.color = (0, 0, 0, 1)
+
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+        self.parent.on_select_task(task)
+
+
+class Cmenu2(Bubble):
+    def __init__(self, **kwargs):
+        super(Cmenu2, self).__init__(**kwargs)
+        self.show_arrow = False
+
+    def menu_selected(self,*l):
+        global text,task
+       
+        text = l[0].text
+
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
+                self.parent.context_menu.background_color = (r, g, b, a)
+                self.parent.remove_widget(self.parent.context_menu)
+
+        for child in self.parent.children:
+                   # child.clear_widgets()
+                    child.background_normal = "button_normal.jpg"
+                    child.color = (0, 0, 0, 1)
+
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+        self.parent.on_select_task(task)
+
+
+
+
+
+class Cmenu3(Bubble):
+    
+    def __init__(self, **kwargs):
+        super(Cmenu3, self).__init__(**kwargs)
+        self.show_arrow = False
+
+    def menu_selected(self,*l):
+        global text
+       
         text = l[0].text
 
         (r, g, b, a) = self.parent.context_menu.background_color
@@ -393,88 +467,7 @@ class Cmenu1(Bubble):
         anim.start(self.parent.context_menu)
         anim.bind(on_complete = on_anim_complete)
 
-        '''
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
 
-            def on_anim_complete(*l):
-                self.parent.context_menu.background_color = (r, g, b, a)
-                self.parent.remove_widget(self.parent.context_menu)
-
-            for child in self.parent.children:
-                    #child.clear_widgets()
-                    child.background_normal = "button_normal.jpg"
-                    child.color = (0, 0, 0, 1)
-
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected :)'
-        '''
-
-class Cmenu2(Bubble):
-    def __init__(self, **kwargs):
-        super(Cmenu2, self).__init__(**kwargs)
-        self.show_arrow = False
-
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
-
-            def on_anim_complete(*l):
-                self.parent.context_menu.background_color = (r, g, b, a)
-                self.parent.remove_widget(self.parent.context_menu)
-
-            for child in self.parent.children:
-                   # child.clear_widgets()
-                    child.background_normal = "button_normal.jpg"
-                    child.color = (0, 0, 0, 1)
-
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
-
-class Cmenu3(Bubble):
-    
-    def __init__(self, **kwargs):
-        super(Cmenu3, self).__init__(**kwargs)
-        self.show_arrow = False
-
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
-
-            def on_anim_complete(*l):
-                self.parent.context_menu.background_color = (r, g, b, a)
-                self.parent.remove_widget(self.parent.context_menu)
-
-            for child in self.parent.children:
-                    #child.clear_widgets()
-                    child.background_normal = "button_normal.jpg"
-                    child.color = (0, 0, 0, 1)
-
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
 
 class Cmenu4(Bubble):
 
@@ -482,31 +475,27 @@ class Cmenu4(Bubble):
         super(Cmenu4, self).__init__(**kwargs)
         self.show_arrow = False
 
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
+    def menu_selected(self,*l):
+        global text
+       
+        text = l[0].text
 
-            def on_anim_complete(*l):
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
-            for child in self.parent.children:
-                    #child.clear_widgets()
+        for child in self.parent.children:
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
                     child.color = (0, 0, 0, 1)
 
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+
+
 
 class Cmenu5(Bubble):
 
@@ -514,31 +503,26 @@ class Cmenu5(Bubble):
         super(Cmenu5, self).__init__(**kwargs)
         self.show_arrow = False
 
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
+    def menu_selected(self,*l):
+        global text
+       
+        text = l[0].text
 
-            def on_anim_complete(*l):
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
-            for child in self.parent.children:
+        for child in self.parent.children:
                    # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
                     child.color = (0, 0, 0, 1)
 
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+
 
 class Cmenu6(Bubble):
 
@@ -546,31 +530,25 @@ class Cmenu6(Bubble):
         super(Cmenu6, self).__init__(**kwargs)
         self.show_arrow = False
 
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
+    def menu_selected(self,*l):
+        global text
+       
+        text = l[0].text
 
-            def on_anim_complete(*l):
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
-            for child in self.parent.children:
-                    #child.clear_widgets()
+        for child in self.parent.children:
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
                     child.color = (0, 0, 0, 1)
 
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
 
 class Cmenu7(Bubble):
 
@@ -578,31 +556,26 @@ class Cmenu7(Bubble):
         super(Cmenu7, self).__init__(**kwargs)
         self.show_arrow = False
 
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
+    def menu_selected(self,*l):
+        global text
+       
+        text = l[0].text
 
-            def on_anim_complete(*l):
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
 
-            for child in self.parent.children:
+        for child in self.parent.children:
                    # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
                     child.color = (0, 0, 0, 1)
 
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected'
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+
 
 class Cmenu8(Bubble):
 
@@ -610,31 +583,26 @@ class Cmenu8(Bubble):
         super(Cmenu8, self).__init__(**kwargs)
         self.show_arrow = False
 
-    def menu_selected(self, *l):
-        if l[0].text == 'hows':
-            # move to sub menu
-            Animation(scroll_x = 1, d=.5 ).start(l[0].parent.parent.parent)
-            #l[0].parent.parent.parent change this and everything relative to something non-relative if you want-to make the menu more extensible
-        elif l[0].text == '<':
-            # move back to root menu
-            Animation(scroll_x = 0, d=.5 ).start(l[0].parent.parent.parent)
-        else:
-            #fade out animation
-            (r, g, b, a) = self.parent.context_menu.background_color
+    def menu_selected(self,*l):
+        global text
+       
+        text = l[0].text
 
-            def on_anim_complete(*l):
+        (r, g, b, a) = self.parent.context_menu.background_color
+        print self.parent.context_menu.background_color
+        def on_anim_complete(*l):
                 self.parent.context_menu.background_color = (r, g, b, a)
                 self.parent.remove_widget(self.parent.context_menu)
-            
-            for child in self.parent.children:
-                    #child.clear_widgets()
+
+        for child in self.parent.children:
+                   # child.clear_widgets()
                     child.background_normal = "button_normal.jpg"
                     child.color = (0, 0, 0, 1)
 
-            anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
-            anim.start(self.parent.context_menu)
-            anim.bind(on_complete = on_anim_complete)
-            print l[0].text + ' selected :)'
+        anim = Animation(background_color = (0, 0, 0, 0), d=.1 )
+        anim.start(self.parent.context_menu)
+        anim.bind(on_complete = on_anim_complete)
+
 
 
 
@@ -642,6 +610,7 @@ class MainScreen(FloatLayout) :
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
+        #self.ids['label'].text = self.ids['label'].text+"\n"+intro
 
 
 class MainMenu(FloatLayout) :
@@ -649,8 +618,16 @@ class MainMenu(FloatLayout) :
     def __init__(self, **kwargs):
         super(MainMenu, self).__init__(**kwargs)
         self.context_menu = Cmenu1()
-        global t1 
+        global t1,t2,t3,t4,t5,t6,t7,t8 
         t1 = Cmenu1()
+        t2 = Cmenu2()
+        t3 = Cmenu3()
+        t4 = Cmenu4()
+        t5 = Cmenu5()
+        t6 = Cmenu6()
+        t7 = Cmenu7()
+        t8 = Cmenu8()
+
 
 
 
@@ -676,19 +653,19 @@ class MainMenu(FloatLayout) :
         if submenu_id == 1:
             self.context_menu = t1
         elif submenu_id == 2:
-            self.context_menu = Cmenu2()
+            self.context_menu = t2
         elif submenu_id == 3:
-            self.context_menu = Cmenu3()
+            self.context_menu = t3
         elif submenu_id == 4:
-            self.context_menu = Cmenu4()
+            self.context_menu = t4
         elif submenu_id == 5:
-            self.context_menu = Cmenu5()
+            self.context_menu = t5
         elif submenu_id == 6:
-            self.context_menu = Cmenu6()
+            self.context_menu = t6
         elif submenu_id == 7:
-            self.context_menu = Cmenu7()
+            self.context_menu = t7
         elif submenu_id == 8:
-            self.context_menu = Cmenu8()
+            self.context_menu = t8
 
         if submenu_id not in ["start","stop","pause"]:
             obj.background_normal = "button_normal_is_on.jpg"
@@ -711,6 +688,19 @@ class MainMenu(FloatLayout) :
 
         else:
             print "stopped"
+
+    def on_select_task(self,task_id):
+        print task_id
+        if task_id=='11':
+            self.ids['label'].text = "A. Gross Motor"
+        elif task_id=='12':
+            self.ids['label'].text = "aaaaaaaaa"
+        elif task_id=='13':
+            self.ids['label'].text = "dddddddddddd"
+        elif task_id=='14':
+            self.ids['label'].text = "xxxxxxxxxxx"
+        elif task_id=='15':
+            self.ids['label'].text = "cccccccccccc"
 
 class MyApp(App):
     def build(self):
