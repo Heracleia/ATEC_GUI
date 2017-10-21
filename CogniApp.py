@@ -24,7 +24,7 @@ Builder.load_string('''
     
 
 <Button>:
-    font_size: self.texture_size[1]/6 
+    font_size: self.texture_size[1]/5 
     size_hint: 0.25,0.130
     color: (0, 0, 0, 1)
     #background_color: (0.81, 0.20, 0.81, 1)
@@ -60,14 +60,35 @@ Builder.load_string('''
             size: self.size
     
     MainScreen:
+        Label:
+            id: label1
+            text:"ATEC" 
+            text_size: root.width-root.width*0.45,  root.height-root.height*0.1
+            font_size: self.texture_size[1]/15 
+            size: self.texture_size
+            pos_hint: {"right":0.92,"top":1} 
+            color: (1, 0, 1, 1)
+            halign: 'left'
+            valign: 'top'
+        
+        Label:
+            id: label2
+            text: "General-Instructions"
+            text_size: root.width-root.width*0.45,  root.height-root.height*0.1
+            font_size: self.texture_size[1]/22 
+            size: self.texture_size
+            pos_hint: {"right":0.92,"top":0.9} 
+            color: (0, 0.5, 0.5, 0.9)
+            halign: 'left'
+            valign: 'top'
          
         Label:
-            id: label
-            text:"ATEC \\n\\nINTRODUCTION:\\n[Begin with child standing.]\\n\\nSCRIPT:\\nWe are going to play games today that involve using your body in lots of different ways.\\n\\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.\\n\\nWe will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.\\n\\nAre you ready to play the games?"
-            text_size: root.width-root.width*0.45,  root.height
+            id: label3
+            text:"INTRODUCTION:\\n[Begin with child standing.]\\n\\nSCRIPT:\\nWe are going to play games today that involve using your body in lots of different ways.\\n\\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.\\n\\nWe will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.\\n\\nAre you ready to play the games?"
+            text_size: root.width-root.width*0.45,  root.height-root.height*0.1
             font_size: self.texture_size[1]/28 
             size: self.texture_size
-            pos_hint: {"right":0.92,"top":01} 
+            pos_hint: {"right":0.92,"top":0.8} 
             color: (1, 1, 1, 1)
             halign: 'left'
             valign: 'top'
@@ -77,7 +98,7 @@ Builder.load_string('''
             on_release:  root.on_control(args[0],"start")
             pos_hint: {"right":1,"top":0.8} 
             background_normal: "start2.png"
-            size_hint: 0.15,0.15
+            size_hint: 0.13,0.13
             background_down: 'record_pressed.png'
 
         Button:
@@ -85,7 +106,7 @@ Builder.load_string('''
             on_release:  root.on_control(args[0],"pause")
             pos_hint: {"right":1,"top":0.6}   
             background_normal: "pause.png"
-            size_hint: 0.15,0.15
+            size_hint: 0.13,0.13
             background_down: 'pause_pressed.png'
 
         Button:
@@ -93,7 +114,7 @@ Builder.load_string('''
             on_release:  root.on_control(args[0],"stop")
             pos_hint: {"right":1,"top":0.4}  
             background_normal: "stop.png"
-            size_hint: 0.15,0.15
+            size_hint: 0.13,0.13
             background_down: 'stop_pressed.png'
 
         Button:
@@ -102,7 +123,16 @@ Builder.load_string('''
             pos_hint: {"right":1,"top":1}  
             background_normal: "complete2.png"
             background_down: 'complete.png'
-            size_hint: 0.15,0.15
+            size_hint: 0.13,0.13
+
+        Button:
+            #text: "HELP"
+            on_release:  root.on_control(args[0],"help")
+            pos_hint: {"right":0.99,"top":0.12}  
+            background_normal: "help2.png"
+            size_hint: 0.1,0.1
+            background_down: 'help.png'
+
         
         
 
@@ -359,15 +389,24 @@ Builder.load_string('''
                         on_release: root.menu_selected                 
 ''')
 
-global tast,text,intro
+global tast,text,intro,t11
 text =""
 task=''
 
 
 
-intro="""INTRODUCTION:\n[Begin with child standing.]\nSCRIPT: We are going to play games today that involve using your body in lots of different ways.\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.\n"+
-We will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.\n
-Are you ready to play the games?"""
+intro= """ATEC \n\nINTRODUCTION:\n[Begin with child standing.]
+\nSCRIPT:\nWe are going to play games today that involve using your body in lots of different ways.
+\nSometimes, you will do movements that are familiar to you; sometimes you will do movements you may not have done before.
+\nWe will always make sure to tell you exactly what to do and sometimes we will show you how to do them. And we always play safe.
+\nAre you ready to play the games?"""
+
+t11 = """A. GROSS MOTOR - GAIT and BALANCE\n
+1. WALK FORWARD AND BACK (8 steps each way)\n
+SCRIPT:\n Now show me how you can walk straight, turn around and come back.  Keep your hands by your side and walk naturally.
+I will count your steps for you. [Do not demonstrate].
+SCORE: Raw Score and converted score are the same: Falling = 0; 
+Awkward gait, asymmetry of arms and legs = 1; Normal even with exaggerations, wriggling etc...= 2"""
 
 
 
@@ -678,6 +717,9 @@ class MainMenu(FloatLayout) :
             print "play button pressed"
         elif control_id == "pause":
             print "pause button pressed"
+        elif control_id =="help":
+            print "Initial Instructions"
+            self.ids['label3'].text = intro
         elif control_id =="complete":
             print "Task Copleted"
             print self.context_menu.ids
@@ -692,15 +734,15 @@ class MainMenu(FloatLayout) :
     def on_select_task(self,task_id):
         print task_id
         if task_id=='11':
-            self.ids['label'].text = "A. Gross Motor"
+            self.ids['label3'].text = t11
         elif task_id=='12':
-            self.ids['label'].text = "aaaaaaaaa"
+            self.ids['label3'].text = "aaaaaaaaa"
         elif task_id=='13':
-            self.ids['label'].text = "dddddddddddd"
+            self.ids['label3'].text = "dddddddddddd"
         elif task_id=='14':
-            self.ids['label'].text = "xxxxxxxxxxx"
+            self.ids['label3'].text = "xxxxxxxxxxx"
         elif task_id=='15':
-            self.ids['label'].text = "cccccccccccc"
+            self.ids['label3'].text = "cccccccccccc"
 
 class MyApp(App):
     def build(self):
