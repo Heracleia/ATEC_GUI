@@ -1,0 +1,15 @@
+
+--- Run ---
+1. Run Server on pc
+2.Run app
+
+--- Install App in Android Device ---
+1. Connect android device to the pc with a cable 
+2. On the phone: Settings -> About this device --> press build number as many times as required to unlock developers mode
+3. Pair android ddevice to the computer via bluetooth
+4. On the phone: Settings -> Developer Options --> USB Debugging (ENABLE)
+5. Build the app from the Android Studio
+
+
+--- Instalation PC server (optional - only for app testing) ---
+1. Build the server (BluetoothServer_Communication)
